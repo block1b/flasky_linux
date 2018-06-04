@@ -46,7 +46,7 @@ def download_file():
         test_num = form.test_num.data
         tar_name = class_name + "_" + test_num + ".zip"
         dir = current_app.config['UPLOADED_PHOTOS_DEST'] + "/" + class_name + "/" + test_num
-	# print 'download dir', dir
+        # print 'download dir', dir
         file_num = 0
         # 获取文件列表
         try:
@@ -62,22 +62,31 @@ def download_file():
         flash('loading......')
         file_list = None
         tar_name = None
-	file_num = 0
+    file_num = 0
     return render_template('download_file.html', form=form, file_list=file_list, tar_name=tar_name, file_num=file_num)
 
 
 @main.route('/upload_file',  methods=['GET', 'POST'])
 def upload_file():
     form = UploadForm()
-    if form.validate_on_submit():
-        dir = form.class_name.data + "/" + form.test_num.data
-        fix = form.photo.data.filename.split('.')[1]
-        fname = form.stu_id.data + form.stu_name.data + form.test_num.data + "." + fix  # 将“.docx”换成'.'会保存上传文件的类型,但是中文文件名会破坏该规则
-        filename = photos.save(form.photo.data, folder=dir, name=fname)
-        file_url = photos.url(filename)
+    file_url = None
+    # if form.validate_on_submit():
+    if request.method == 'POST':
+
+        print "post form"
+        for f in request.files.getlist('file'):
+            dir = current_app.config['UPLOADED_PHOTOS_DEST'] + '/' + form.class_name.data + "/" + form.test_num.data
+            # dir = dir.decode('utf-8')
+            print "dir", dir
+            print "filename", f.filename
+            fix = f.filename.split('.')[1]
+            fname = form.stu_id.data + form.stu_name.data + form.test_num.data + "." + fix
+            if not os.path.exists(dir):
+                os.makedirs(dir)
+            f.save(os.path.join(dir, fname))
         flash('Your file has been updated.')
     else:
-        flash('loading......')
+        flash('updated field,check your input')
         file_url = None
     return render_template('upload_file.html', form=form, file_url=file_url)
 

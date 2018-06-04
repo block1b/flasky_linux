@@ -3,6 +3,13 @@
 {% import "_macros.html" as macros %}
 <!--用于渲染表单的宏-->
 {% from "_upload_file.html" import render_field %}
+
+{% block head %}
+{{ super() }}
+<!--拖动上传文件的渲染-->
+<link rel="stylesheet" href="{{ url_for('static', filename='dropzone.css') }}">
+{% endblock %}
+
 {% block title %}Upload{% endblock %}
 
 {% block page_content %}
@@ -14,22 +21,19 @@
 <div >
     <h1>文件上传</h1>
 
-    <form method="POST" enctype="multipart/form-data">
-      {{ form.hidden_tag() }}
-      <table>
+</div>
+
+<div>
+    <!-- Change action value to your upload address -->
+    <form action="{{ url_for('main.upload_file') }}" class="dropzone" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <table>
         {{ render_field(form.class_name) }}
         {{ render_field(form.test_num) }}
         {{ render_field(form.stu_id) }}
         {{ render_field(form.stu_name) }}
-        {{ render_field(form.photo) }}
-
-      </table>
-      {{ form.submit }}
+        </table>
     </form>
-
-<!--{% if file_url %}-->
-    <!--<br><img src="{{ file_url }}">-->
-<!--{% endif %}-->
 </div>
 
 {% endblock %}
@@ -37,4 +41,5 @@
 {% block scripts %}
 {{ super() }}
 {{ pagedown.include_pagedown() }}
+<script src="{{ url_for('static', filename='dropzone.js') }}"></script>
 {% endblock %}

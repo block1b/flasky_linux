@@ -1,4 +1,5 @@
 config.py
+tornado_server.py
 *.pyc
 upload/
 download

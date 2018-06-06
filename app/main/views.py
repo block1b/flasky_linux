@@ -62,7 +62,7 @@ def download_file():
         flash('loading......')
         file_list = None
         tar_name = None
-    file_num = 0
+        file_num = 0
     return render_template('download_file.html', form=form, file_list=file_list, tar_name=tar_name, file_num=file_num)
 
 
@@ -72,8 +72,13 @@ def upload_file():
     file_url = None
     # if form.validate_on_submit():
     if request.method == 'POST':
-
+        if form.stu_id.data and form.stu_name.data:
+            pass
+        else:
+            flash('upload field,check your input')
+            return redirect(url_for('main.upload_file'))
         print "post form"
+
         for f in request.files.getlist('file'):
             dir = current_app.config['UPLOADED_PHOTOS_DEST'] + '/' + form.class_name.data + "/" + form.test_num.data
             # dir = dir.decode('utf-8')
@@ -84,11 +89,12 @@ def upload_file():
             if not os.path.exists(dir):
                 os.makedirs(dir)
             f.save(os.path.join(dir, fname))
-        flash('Your file has been updated.')
+        # flash('Your file has been upload')
+        return render_template('upload_file.html', form=form, file_url=file_url)
     else:
-        flash('updated field,check your input')
+        # flash('upload field,check your input')
         file_url = None
-    return render_template('upload_file.html', form=form, file_url=file_url)
+        return render_template('upload_file.html', form=form, file_url=file_url)
 
 
 @main.after_app_request

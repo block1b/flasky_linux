@@ -11,7 +11,7 @@ from ..import photos
 
 
 class DownloadForm(FlaskForm):
-    class_name = SelectField(u"课程", choices=[(u'软件体系结构', u'软件体系结构'), (u'组网工程', u'组网工程'), (u'网络安全', u'网络安全'), ('linux', 'linux')])
+    class_name = SelectField(u"课程", choices=[(u'项目管理', u'项目管理'),(u'软件体系结构', u'软件体系结构'), (u'组网工程', u'组网工程'), (u'网络安全', u'网络安全'), ('linux', 'linux')])
     test_num = SelectField(u'实验号', choices=[(u'实验一', u'实验一'), (u'实验二', u'实验二'), (u'实验三', u'实验三'), (u'实验四', u'实验四'), (u'实验五', u'实验五'),
                                              (u'实验六', u'实验六'), (u'实验七', u'实验七'), (u'实验八', u'实验八'), (u'实验九', u'实验九'), (u'实验十', u'实验十')])
 
@@ -19,7 +19,7 @@ class DownloadForm(FlaskForm):
 
 
 class UploadForm(FlaskForm):
-    class_name = SelectField(u"课程", choices=[(u'软件体系结构', u'软件体系结构'), (u'组网工程', u'组网工程'), (u'网络安全', u'网络安全'), ('linux', 'linux')])
+    class_name = SelectField(u"课程", choices=[(u'项目管理', u'项目管理'),(u'软件体系结构', u'软件体系结构'), (u'组网工程', u'组网工程'), (u'网络安全', u'网络安全'), ('linux', 'linux')])
     test_num = SelectField(u'实验号', choices=[(u'实验一', u'实验一'), (u'实验二', u'实验二'), (u'实验三', u'实验三'), (u'实验四', u'实验四'),
                                              (u'实验五', u'实验五'), (u'实验六', u'实验六'), (u'实验七', u'实验七'), (u'实验八', u'实验八'), (u'实验九', u'实验九'),
                                              (u'实验十', u'实验十')])

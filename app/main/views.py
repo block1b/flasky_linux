@@ -37,8 +37,6 @@ def download_tar(filename):
 
 # emmm好像只是做了个manage中的show
 @main.route('/download_file',  methods=['GET', 'POST'])
-@login_required
-@admin_required
 def download_file():
     form = DownloadForm()
     if form.validate_on_submit():
@@ -90,11 +88,11 @@ def upload_file():
                 os.makedirs(dir)
             f.save(os.path.join(dir, fname))
         # flash('Your file has been upload')
-        return render_template('upload_file.html', form=form, file_url=file_url)
     else:
         # flash('upload field,check your input')
         file_url = None
-        return render_template('upload_file.html', form=form, file_url=file_url)
+
+    return render_template('upload_file.html', form=form, file_url=file_url)
 
 
 @main.after_app_request

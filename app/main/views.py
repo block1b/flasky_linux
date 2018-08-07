@@ -18,7 +18,8 @@ from dir_to_7z import dir_to_7z
 @login_required
 @admin_required
 def download_tar(filename):
-    flash('loading......')
+# ‘success’、‘info’、‘warning’、‘danger’
+    flash('loading......','info')
     # 打包目标文件 参数：源文件目录，压缩文件保存目录，压缩文件名
     class_name = filename.split('_')[0]
     test_num = filename.split('_')[1].split('.')[0]
@@ -55,9 +56,9 @@ def download_file():
         # print "****************"
         # for f in file_list:
         #     print f.encode('utf-8')
-        flash('let`s check it')
+        flash('let`s check it','info')
     else:
-        flash('loading......')
+        flash('loading......','info')
         file_list = None
         tar_name = None
         file_num = 0
@@ -73,7 +74,7 @@ def upload_file():
         if form.stu_id.data and form.stu_name.data:
             pass
         else:
-            flash('upload field,check your input')
+            flash('upload field,check your input', 'warning')
             return redirect(url_for('main.upload_file'))
         print "post form"
 

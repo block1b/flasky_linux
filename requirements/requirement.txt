@@ -1,5 +1,5 @@
 alembic==0.8.10
-Babel==0.9.6
+Babel==2.9.1
 backports-abc==0.5
 backports.ssl-match-hostname==3.4.0.2
 bleach==1.4
